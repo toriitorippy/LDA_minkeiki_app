@@ -1,0 +1,30 @@
+version: '3'
+services:
+  vue:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/shared
+    working_dir: /shared/frontend
+    stdin_open: true
+    tty: true
+    depends_on:
+      - flask
+    command: yarn run serve
+
+  flask:
+    build: ./backend
+    tty: true
+    volumes:
+      - .:/shared
+    working_dir: /shared/backend
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
+      - "8888:8888"
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_APP: ./app.py
+    command: python app.py

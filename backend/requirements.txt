@@ -1,0 +1,7 @@
+gensim
+Flask
+Flask-cors
+Flask_restful
+pandas
+lxml
+jupyterlab==1.2.3
